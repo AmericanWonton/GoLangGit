@@ -46,3 +46,36 @@ func sum(x ...int) int { //Infinite parameters
 	}
 	return sum
 }
+
+//"Unfurling" a slice
+xi := []int{2, 3, 4, 5, 6, 7, 8, 9}
+x := sum(xi...) //These are the Ints "unfurled" into the parameter
+//you could also pass in 0 arguments x := sum()
+fmt.Println("The total is ", x)
+
+func sum(x ...int) int { //Infinite parameters
+	fmt.Println(x)
+	fmt.Printf("%T\n", x)
+
+	sum := 0
+	for i, v := range x {
+		sum += v
+		fmt.Printf("For item in position %v, we are now adding", i)
+		fmt.Printf("%v to the total, which is now %v\n", v, sum)
+	}
+	return sum
+}
+
+//Defer
+defer foo() //Runs at the END of the func main
+//Good for closing file
+bar()
+
+func foo() {
+	fmt.Println("foo")
+}
+func bar() {
+	fmt.Println("bar")
+}
+
+//Method
