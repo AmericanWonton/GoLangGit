@@ -150,3 +150,73 @@ x := []int{4, 5, 7, 8, 42}
 	for k, v := range m {
 		fmt.Println(k, v)
 	}
+	//delete map entry
+	m := map[string]float64{
+		"Cocaine": 43.50,
+		"Weed":    20.50,
+		"Heroin":  8.75,
+		"Crack":   45.56,
+	}
+	fmt.Println(m)
+
+	delete(m, "Crack")
+	fmt.Println(m)
+
+	//Structs
+	type person struct{
+		first string
+		last string
+	}
+
+	p1 := person{
+		first: "James",
+		last: "Bond",
+	}
+	
+	p2 := person{
+		first: "Miss",
+		last: "Moneypenny",
+	}
+
+	fmt.Println(p1)
+	fmt.Println(p2)
+	fmt.Println(p1.first)
+	fmt.Println(p1.last)
+	fmt.Println(p2.first)
+	fmt.Println(p2.last)
+
+	//Embedded Struct
+	type person struct {
+		first string
+		last  string
+		age   int
+	}
+	type secretAgent struct {
+		person       //This DOSEN'T NEED A FIELD NAME, JUST THE TYPE
+		license2Kill bool
+	}
+
+	sam := secretAgent{
+		person: person{
+			first: "James",
+			last:  "Bond",
+			age:   32,
+		},
+		license2Kill: true,
+	}
+
+	fmt.Println(sam)
+	fmt.Println(sam.person.age)
+
+	//Anonymous Structs
+	person1 := struct {
+		first string
+		last  string
+		age   int
+	}{
+		first: "Ugly",
+		last:  "ass",
+		age:   42,
+	}
+
+	fmt.Println(person1)
