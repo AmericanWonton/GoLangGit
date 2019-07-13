@@ -258,3 +258,15 @@ s := stringTest()
 	//Recursion-Maybe use a loop instead, but whatever
 	//It's when a function calls itself...don't do it.
 
+	a := incrementor()
+	fmt.Println(a())
+
+	func incrementor() func() int {
+		var x int
+		return func() int {
+			x++
+			return x
+		}
+	}
+	
+
