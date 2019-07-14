@@ -116,3 +116,28 @@ func bar() {
 	wg.Wait() //This says, don't exit the program until everything is done.
 	fmt.Println("Goroutines: ", runtime.NumGoroutine())
 	fmt.Println("Count: ", counter)
+
+	//Atomic Lesson (It's a package, not sure what for)
+	/*
+		Different Go routines are accessing variables at the same time.
+		This can be a problem called  a "Race". They 'write' over each other, depending on
+		which routine is fastest.
+	*/
+	fmt.Println("CPU's: ", runtime.NumCPU())
+	fmt.Println("Goroutines: ", runtime.NumGoroutine())
+	var counter int64
+	const gs = 100
+	var wg sync.WaitGroup
+	wg.Add(gs)
+
+	for i := 0; i < gs; i++ {
+		go func() {
+			atomic.AddInt64(&counter, 1)
+			fmt.Println("Counter \t", atomic.LoadInt64(&counter))
+			wg.Done() //Finishes this Go Routine
+		}()
+		fmt.Println("Goroutines: ", runtime.NumGoroutine())
+	}
+	wg.Wait() //This says, don't exit the program until everything is done.
+	fmt.Println("Goroutines: ", runtime.NumGoroutine())
+	fmt.Println("Count: ", counter)
